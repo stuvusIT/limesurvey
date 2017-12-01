@@ -1,0 +1,57 @@
+-- MySQL dump 10.15  Distrib 10.0.31-MariaDB, for debian-linux-gnu (x86_64)
+--
+-- Host: localhost    Database: limesurvey
+-- ------------------------------------------------------
+-- Server version	10.0.31-MariaDB-0ubuntu0.16.04.2
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Dumping data for table `lime_plugin_settings`
+--
+
+LOCK TABLES `lime_plugin_settings` WRITE;
+/*!40000 ALTER TABLE `lime_plugin_settings` DISABLE KEYS */;
+INSERT INTO `lime_plugin_settings` VALUES
+(NULL,{{ limesurvey_ldap_plugin_id.stdout_lines[0] }},NULL,NULL,'server','\"{{ limesurvey_ldap_plugin_server_url | mandatory }}\"'),
+(NULL,{{ limesurvey_ldap_plugin_id.stdout_lines[0] }},NULL,NULL,'ldapport','\"{{ limesurvey_ldap_plugin_server_port | default(389) }}\"'),
+(NULL,{{ limesurvey_ldap_plugin_id.stdout_lines[0] }},NULL,NULL,'ldapversion','\"{{ limesurvey_ldap_plugin_ldap_version | mandatory }}\"'),
+(NULL,{{ limesurvey_ldap_plugin_id.stdout_lines[0] }},NULL,NULL,'ldapoptreferrals','\"{{ limesurvey_ldap_plugin_opt_referrals | default(0) }}\"'),
+(NULL,{{ limesurvey_ldap_plugin_id.stdout_lines[0] }},NULL,NULL,'ldaptls','\"{{ limesurvey_ldap_plugin_tls | default(0) }}\"'),
+(NULL,{{ limesurvey_ldap_plugin_id.stdout_lines[0] }},NULL,NULL,'ldapmode','\"{{ limesurvey_ldap_plugin_ldap_mode | mandatory }}\"'),
+(NULL,{{ limesurvey_ldap_plugin_id.stdout_lines[0] }},NULL,NULL,'userprefix','{{ limesurvey_ldap_plugin_user_prefix | default("null") }}'),
+(NULL,{{ limesurvey_ldap_plugin_id.stdout_lines[0] }},NULL,NULL,'domainsuffix','{{ limesurvey_ldap_plugin_domain_prefix | default("null") }}'),
+(NULL,{{ limesurvey_ldap_plugin_id.stdout_lines[0] }},NULL,NULL,'searchuserattribute','\"{{ limesurvey_ldap_plugin_search_user_attribute | mandatory }}\"'),
+(NULL,{{ limesurvey_ldap_plugin_id.stdout_lines[0] }},NULL,NULL,'usersearchbase','\"{{ limesurvey_ldap_plugin_user_search_base }}\"'),
+(NULL,{{ limesurvey_ldap_plugin_id.stdout_lines[0] }},NULL,NULL,'extrauserfilter','\"{{ limesurvey_ldap_plugin_extra_user_filer | default("") }}\"'),
+(NULL,{{ limesurvey_ldap_plugin_id.stdout_lines[0] }},NULL,NULL,'binddn','\"{{ limesurvey_ldap_plugin_binddn }}\"'),
+(NULL,{{ limesurvey_ldap_plugin_id.stdout_lines[0] }},NULL,NULL,'bindpwd','\"{{ limesurvey_ldap_plugin_bindpwd }}\"'),
+(NULL,{{ limesurvey_ldap_plugin_id.stdout_lines[0] }},NULL,NULL,'mailattribute','\"{{ limesurvey_ldap_plugin_mail_attribute }}\"'),
+(NULL,{{ limesurvey_ldap_plugin_id.stdout_lines[0] }},NULL,NULL,'fullnameattribute','\"{{ limesurvey_ldap_plugin_full_name_attribute }}\"'),
+(NULL,{{ limesurvey_ldap_plugin_id.stdout_lines[0] }},NULL,NULL,'is_default','\"{{ limesurvey_ldap_plugin_is_default | default(0)}}\"'),
+(NULL,{{ limesurvey_ldap_plugin_id.stdout_lines[0] }},NULL,NULL,'autocreate','\"{{ limesurvey_ldap_plugin_auto_create | default(0) }}\"'),
+(NULL,{{ limesurvey_ldap_plugin_id.stdout_lines[0] }},NULL,NULL,'automaticsurveycreation','\"{{ limesurvey_ldap_plugin_automatic_survey_creation | default(0) }}\"'),
+(NULL,{{ limesurvey_ldap_plugin_id.stdout_lines[0] }},NULL,NULL,'groupsearchbase','\"{{ limesurvey_ldap_plugin_group_search_base | default("") }}\"'),
+(NULL,{{ limesurvey_ldap_plugin_id.stdout_lines[0] }},NULL,NULL,'groupsearchfilter','\"{{ limesurvey_ldap_plugin_group_search_filter | default("") }}\"'),
+(NULL,{{ limesurvey_ldap_plugin_id.stdout_lines[0] }},NULL,NULL,'allowInitialUser','\"{{ limesurvey_ldap_plugin_allow_initial_user | default(0) }}\"');
+/*!40000 ALTER TABLE `lime_plugin_settings` ENABLE KEYS */;
+UNLOCK TABLES;
+
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2017-12-01 13:52:17

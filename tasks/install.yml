@@ -1,0 +1,78 @@
+- name: Update repositories cache and install php packages
+  apt:
+    name: "{{ item }}"
+    update_cache: yes
+  when: ansible_pkg_mgr == "apt"
+  with_items:
+    - php-simplexml
+    - php-gd
+    - php-ldap
+    - php-imap
+    - php-mbstring
+    - php-zip
+    - php-mysqli
+    - python-mysqldb
+
+- name: Create install dir
+  file:
+    path: /srv/limesurvey
+    state: directory
+
+- name: Download and Extract limesurvey
+  unarchive:
+    src: "{{ limesurvey_release_link }}"
+    dest: /srv/limesurvey
+    remote_src: true
+    owner: www-data
+    group: www-data
+    extra_opts: ["--strip-components=1"]
+
+- name: Remove anonymous user account
+  mysql_user:
+    name: ''
+    host: localhost
+    state: absent
+
+- name: Create a new database with name '{{ limesurvey_mysql_database_name }}'
+  mysql_db:
+    name: "{{ limesurvey_mysql_database_name }}"
+    state: present
+
+- name: Create mariadb user
+  mysql_user:
+    name: "{{ limesurvey_mysql_user }}"
+    password: "{{ limesurvey_mysql_password }}"
+    priv: '{{ limesurvey_mysql_database_name }}.*:ALL,GRANT'
+    state: present
+
+- name: Place config file
+  template:
+    src: config.php.j2
+    dest: /srv/limesurvey/application/config/config.php
+    owner: www-data
+    group: www-data
+    mode: 0644
+
+- name: Run installer  
+  shell: "sudo -u www-data php console.php install {{ limesurvey_admin_user }} {{ limesurvey_admin_password }} '{{ limesurvey_admin_full_name }}' '{{ limesurvey_admin_email }}'"
+  args:
+    chdir: /srv/limesurvey/application/commands/
+
+- name: Insert ldap to lime_plugins
+  shell: "mysql {{ limesurvey_mysql_database_name }} -Ns -e 'Insert INTO lime_plugins (`name`) Values (\"AuthLDAP\");'"
+  when: limesurvey_use_ldap
+
+- name: Get db id of ldap plugin
+  shell: "mysql {{ limesurvey_mysql_database_name }} -Ns -e 'Select `id` from lime_plugins where `name`=\"AuthLDAP\";'"
+  register: limesurvey_ldap_plugin_id
+  when: limesurvey_use_ldap
+
+- name: Create ldap plugin sql statment
+  template:
+    src: ldap_config.sql.j2
+    dest: /tmp/ldap_config.sql
+  when: limesurvey_use_ldap
+
+- name: Import data for ldap plugin  
+  shell: "mysql {{ limesurvey_mysql_database_name }} < /tmp/ldap_config.sql"
+  when: limesurvey_use_ldap

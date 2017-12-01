@@ -1,0 +1,82 @@
+---
+- name: Place config file
+  template:
+    src: config.php.j2
+    dest: /srv/limesurvey/application/config/config.php
+    owner: www-data
+    group: www-data
+    mode: 0644
+
+- name: Place email config file
+  template:
+    src: email.php.j2
+    dest: /srv/limesurvey/application/config/email.php
+    owner: www-data
+    group: www-data
+    mode: 0644
+
+- name: Get db id of ldap plugin
+  shell: "mysql {{ limesurvey_mysql_database_name }} -Ns -e 'Select `id` from lime_plugins where `name`=\"AuthLDAP\";'"
+  register: limesurvey_ldap_plugin_id
+  when: limesurvey_use_ldap
+  changed_when: False
+
+- name: Update Ldap Plugin settings
+  shell: "mysql {{ limesurvey_mysql_database_name }} -Ns -e 'Update lime_plugin_settings set `value`=\"{{ item.value }}\" where `plugin_id`={{ limesurvey_ldap_plugin_id.stdout_lines[0] }} and `key`=\"{{ item.key }}\"; Select ROW_COUNT();'"
+  register: command_result
+  changed_when: "command_result.stdout | int != 0"
+  with_items:
+    - value: "{{ limesurvey_ldap_plugin_server_url | mandatory }}"
+      key: "server"
+    - value: "{{ limesurvey_ldap_plugin_server_port | default(389) }}"
+      key: "ldapport"
+    - value: "{{ limesurvey_ldap_plugin_ldap_version | mandatory }}"
+      key: "ldapversion"
+    - value: "{{ limesurvey_ldap_plugin_opt_referrals | default(0) }}"
+      key: "ldapoptreferrals"
+    - value: "{{ limesurvey_ldap_plugin_tls | default(0) }}"
+      key: "ldaptls"
+    - value: "{{ limesurvey_ldap_plugin_ldap_mode | mandatory }}"
+      key: "ldapmode"
+    - value: "{{ limesurvey_ldap_plugin_user_prefix | default(\"null\") }}"
+      key: "userprefix"
+    - value: "{{ limesurvey_ldap_plugin_domain_prefix | default(\"null\") }}"
+      key: "domainsuffix"
+    - value: "{{ limesurvey_ldap_plugin_search_user_attribute | mandatory }}"
+      key: "searchuserattribute"
+    - value: "{{ limesurvey_ldap_plugin_user_search_base }}"
+      key: "usersearchbase"
+    - value: "{{ limesurvey_ldap_plugin_extra_user_filer | default(\"\") }}"
+      key: "extrauserfilter"
+    - value: "{{ limesurvey_ldap_plugin_binddn }}"
+      key: "binddn"
+    - value: "{{ limesurvey_ldap_plugin_bindpwd }}"
+      key: "bindpwd"
+    - value: "{{ limesurvey_ldap_plugin_mail_attribute }}"
+      key: "mailattribute"
+    - value: "{{ limesurvey_ldap_plugin_full_name_attribute }}"
+      key: "fullnameattribute"
+    - value: "{{ limesurvey_ldap_plugin_is_default | default(0) }}"
+      key: "is_default"
+    - value: "{{ limesurvey_ldap_plugin_auto_create | default(0) }}"
+      key: "autocreate"
+    - value: "{{ limesurvey_ldap_plugin_automatic_survey_creation | default(0) }}"
+      key: "automaticsurveycreation"
+    - value: "{{ limesurvey_ldap_plugin_group_search_base | default(\"\") }}"
+      key: "groupsearchbase"
+    - value: "{{ limesurvey_ldap_plugin_group_search_filter | default(\"\") }}"
+      key: "groupsearchfilter"
+    - value: "{{ limesurvey_ldap_plugin_allow_initial_user | default(0) }}"
+      key: "allowInitialUser"
+
+- name: Activate ldap plugin
+  shell: "mysql {{ limesurvey_mysql_database_name }} -Ns -e 'Update lime_plugins set active=1 where `name`=\"AuthLDAP\"; Select ROW_COUNT();'"
+  when: limesurvey_use_ldap
+  register: command_result
+  changed_when: "command_result.stdout | int != 0"
+
+- name: Dectivate ldap plugin
+  shell: "mysql {{ limesurvey_mysql_database_name }} -Ns -e 'Update lime_plugins set active=0 where `name`=\"AuthLDAP\";Select ROW_COUNT();'"
+  when: not limesurvey_use_ldap
+  register: command_result
+  changed_when: "command_result.stdout | int != 0"

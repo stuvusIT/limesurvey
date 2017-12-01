@@ -1,3 +1,10 @@
 ---
+- stat:
+    path: /srv/limesurvey
+  register: limesurvey_dir_exists  
 
-...
+- import_tasks: install.yml
+  when: not limesurvey_dir_exists.stat.exists
+
+- import_tasks: configure.yml
+

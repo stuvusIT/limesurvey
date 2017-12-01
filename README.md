@@ -1,25 +1,47 @@
-# Role Name
+# Limesurvey
 
-A brief description of the role goes here.
-
-
-## Requirements
-
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here.
-For instance, if the role uses the EC2 module or depends on other Ansible roles, it may be a good idea to mention in this section that the boto package is required.
+A role to set up and configure a limesurvey instance.
 
 
 ## Role Variables
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role.
-Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
-
-```yml
-```
+| Name                                               |    Default/Required     | Description                                                    |
+|:---------------------------------------------------|:-----------------------:|:---------------------------------------------------------------|
+| `limesurvey_release_link`                          |   :heavy_check_mark:    | Link to the tar.gz file of the survey instance to be installed |
+| `limesurvey_mysql_database_name`                   |      `limesurvey`       | The database name                                              |
+| `limesurvey_mysql_user`                            |      `limesurvey`       | Mysql user                                                     |
+| `limesurvey_smtp_server`                           |   :heavy_check_mark:    | SMTP server url                                                |
+| `limesurvey_smtp_port`                             |   :heavy_check_mark:    | SMTP Port                                                      |
+| `limesurvey_smtp_user`                             |   :heavy_check_mark:    | SMTP User                                                      |
+| `limesurvey_smtp_password`                         |            v            | SMTP password                                                  |
+| `limesurvey_smtp_ssl`                              |   :heavy_check_mark:    | SMTP encryption either `ssl`, `tls` or ` `                     |
+| `limesurvey_smtp_debug`                            |           `0`           | SMTP debug option `0` or `1`                                   |
+| `limesurvey_admin_user`                            |         `admin`         | Admin nickname default                                         |
+| `limesurvey_admin_password`                        |   :heavy_check_mark:    | Admin password                                                 |
+| `limesurvey_admin_full_name`                       |       `Your Name`       | Full name of the administrator                                 |
+| `limesurvey_admin_email`                           | `your.name@example.com` | Admin email adress                                             |
+| `limesurvey_mail_admin_name`                       |       `Your Name`       | Sender name for outgoing emails                                |
+| `limesurvey_mail_admin_adress`                     | `your.name@example.com` | Sender adress of outgoing emails                               |
+| `limesurvey_mail_bounce_adress`                    | `your.name@example.com` | Email Adress for bounces                                       |
+| `limesurvey_ldap_plugin_server_url`                |   :heavy_check_mark:    | Url to your ldap server                                                 |
+| `limesurvey_ldap_plugin_server_port`               |          `389`          | Ldap port                                                 |
+| `limesurvey_ldap_plugin_ldap_version`              |   :heavy_check_mark:    | Ldap version either `2` or `3`'                                                 |
+| `limesurvey_ldap_plugin_opt_referrals`             |           `0`           | Select true if referrals must be followed (use false for ActiveDirectory)                                                |
+| `limesurvey_ldap_plugin_tls`                       |           `0`           | Use tls either `0` or `1`                                                |
+| `limesurvey_ldap_plugin_ldap_mode`                 |   :heavy_check_mark:    | How limesurvey should connect to ldap either `simplebind` or `searchandbind`                                                 |
+| `limesurvey_ldap_plugin_search_user_attribute`     |   :heavy_check_mark:    | Attribute to compare to the given login can be uid, cn, mail, ...                                                |
+| `limesurvey_ldap_plugin_user_search_base`          |   :heavy_check_mark:    | Base DN for the user search operation. Multiple bases may be separated by a semicolon (;)                                                 |
+| `limesurvey_ldap_plugin_binddn`                    |   ` `   |Optional DN of the LDAP account used to search for the end-user's DN. An anonymous bind is performed if empty.                                                 |
+| `limesurvey_ldap_plugin_bindpwd`                   |   ``    | Password of the LDAP account used to search for the end-user's DN if previoulsy set                                                 |
+| `limesurvey_ldap_plugin_mail_attribute`            |   :heavy_check_mark:    | LDAP attribute of email address                                                |
+| `limesurvey_ldap_plugin_full_name_attribute`       |   :heavy_check_mark:    | LDAP attribute of full name                                              |
+| `limesurvey_ldap_plugin_is_default`                |           `0`           | Set to `1` to make ldap the default authentication method                                              |
+| `limesurvey_ldap_plugin_auto_create`               |           `0`           | Automatically create user if it exists in LDAP server                                                 |
+| `limesurvey_ldap_plugin_automatic_survey_creation` |           `0`           | Grant survey creation permission to automatically created users                                                 |
+| `limesurvey_ldap_plugin_allow_initial_user`        |           `0`           | Allow initial user to login via LDAP                                              |
+| `limesurvey_use_ldap`                              |         `false`         | Admin password                                                 |
 
 ## Example Playbook
-
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
 ```yml
 ```
@@ -31,4 +53,4 @@ This work is licensed under a [Creative Commons Attribution-ShareAlike 4.0 Inter
 
 ## Author Information
 
-- [Author Name (nickname)](github profile) _your-full-stuvus-email-address@stuvus.uni-stuttgart.de_
+- [Fritz Otlinghaus (Scriptkiddi)](https://github.com/scriptkiddi) _fritz.otlinghaus@stuvus.uni-stuttgart.de_

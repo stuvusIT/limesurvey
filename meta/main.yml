@@ -1,7 +1,6 @@
----
 galaxy_info:
-  author: Insert author(s) here
-  description: Insert description here
+  author: Fritz Otlinghaus
+  description: Sets up a limesurvey instance
   company: stuvus (https://stuvus.uni-stuttgart.de)
 
   license: CC-BY-SA
@@ -17,7 +16,11 @@ galaxy_info:
         - artful
 
   galaxy_tags:
-    - Insert ansible galaxy tags here
+    - survey
+    - limesurvey
 
 dependencies: []
-...
+  #- { role: stuvusIT.mariadb }
+  #- { role: stuvusIT.ldap_client }
+  #- { role: stuvusIT.php-fpm }
+  #- { role: stuvusIT.nginx }

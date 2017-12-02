@@ -1,0 +1,25 @@
+---
+limesurvey_mysql_database_name: limesurvey
+limesurvey_mysql_user: limesurvey
+limesurvey_mysql_host: localhost
+limesurvey_mysql_port: 3306
+limesurvey_smtp_server: ''
+limesurvey_smtp_port: 587
+limesurvey_smtp_user: ''
+limesurvey_smtp_passwort: ''
+limesurvey_smtp_ssl: "tls"
+limesurvey_smtp_debug: false
+limesurvey_admin_user: admin
+limesurvey_admin_full_name: "Your Name" 
+limesurvey_admin_email: "your.name@example.com"
+limesurvey_mail_admin_name: "Your Name"
+limesurvey_mail_admin_adress: "your.name@example.com"
+limesurvey_mail_bounce_adress: "your.name@example.com"
+limesurvey_ldap_plugin_server_port: 389
+limesurvey_ldap_plugin_opt_referrals: false
+limesurvey_ldap_plugin_tls: false
+limesurvey_ldap_plugin_is_default: false
+limesurvey_ldap_plugin_auto_create: false
+limesurvey_ldap_plugin_automatic_survey_creation: false
+limesurvey_ldap_plugin_allow_initial_user: false
+limesurvey_use_ldap: false

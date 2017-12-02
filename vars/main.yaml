@@ -34,33 +34,3 @@ php_fpm_php_ini_values:
   value: php_zlib
 nginx_access_log: "/var/log/nginx/limesurvey_access.log"
 nginx_error_log: "/var/log/nginx/limesurvey_error.log"
-served_domains:
-  - domains: 
-      - survey
-      - limesurvey
-    default_server: true
-    allowed_ip_ranges:
-      - 172.27.10.0/24
-    https: false
-    enable_http2: true
-    root: /srv/limesurvey
-    index_files: 
-      - index.php
-    locations:
-      - condition: /favicon.ico
-        content:
-        |
-          log_not_found off;
-          access_log off;
-      - condition: /robots.txt
-        content:
-        |
-          allow all;
-          log_not_found off;
-          access_log off;
-      - condition: ~ \.php$
-        content:
-        |
-          include fastcgi.conf;
-          fastcgi_intercept_errors on;
-          fastcgi_pass unix:/run/php/php7.0-fpm.sock;

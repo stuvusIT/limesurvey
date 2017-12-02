@@ -25,6 +25,7 @@
   shell: "mysql {{ limesurvey_mysql_database_name }} -Ns -e 'Update lime_plugin_settings set `value`=\"\\\"{{ item.value }}\\\"\" where `plugin_id`={{ limesurvey_ldap_plugin_id.stdout_lines[0] }} and `key`=\"{{ item.key }}\"; Select ROW_COUNT();'"
   register: command_result
   changed_when: "command_result.stdout | int != 0"
+  when: limesurvey_use_ldap
   with_items:
     - value: "{{ limesurvey_ldap_plugin_server_url }}"
       key: "server"
@@ -44,7 +45,7 @@
       key: "domainsuffix"
     - value: "{{ limesurvey_ldap_plugin_search_user_attribute }}"
       key: "searchuserattribute"
-    - value: "{{ limesurvey_ldap_plugin_user_search_base }}"
+    - value: "{{ limesurvey_ldap_plugin_user_search_base | join(;) }}"
       key: "usersearchbase"
     - value: "{{ limesurvey_ldap_plugin_extra_user_filer }}"
       key: "extrauserfilter"
@@ -69,14 +70,9 @@
     - value: "{{ limesurvey_ldap_plugin_allow_initial_user }}"
       key: "allowInitialUser"
 
-- name: Activate ldap plugin
-  shell: "mysql {{ limesurvey_mysql_database_name }} -Ns -e 'Update lime_plugins set active=1 where `name`=\"AuthLDAP\"; Select ROW_COUNT();'"
+- name: Deactive or Activate ldap plugin
+  shell: "mysql {{ limesurvey_mysql_database_name }} -Ns -e 'Update lime_plugins set active={{ limesurvey_use_ldap | int}} where `name`=\"AuthLDAP\"; Select ROW_COUNT();'"
   when: limesurvey_use_ldap
   register: command_result
   changed_when: "command_result.stdout | int != 0"
 
-- name: Dectivate ldap plugin
-  shell: "mysql {{ limesurvey_mysql_database_name }} -Ns -e 'Update lime_plugins set active=0 where `name`=\"AuthLDAP\";Select ROW_COUNT();'"
-  when: not limesurvey_use_ldap
-  register: command_result
-  changed_when: "command_result.stdout | int != 0"

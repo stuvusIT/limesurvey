@@ -1,7 +1,11 @@
-- name: Update repositories cache and install php packages
+- name: Update repositories cache
+  apt:
+    update_cache: yes
+  when: ansible_pkg_mgr == "apt"
+
+- name: Install php packages
   apt:
     name: "{{ item }}"
-    update_cache: yes
   when: ansible_pkg_mgr == "apt"
   with_items:
     - php-simplexml
@@ -18,7 +22,7 @@
     path: /srv/limesurvey
     state: directory
 
-- name: Download and Extract limesurvey
+- name: Download and extract limesurvey
   unarchive:
     src: "{{ limesurvey_release_link }}"
     dest: /srv/limesurvey
@@ -36,7 +40,6 @@
 - name: Create a new database with name '{{ limesurvey_mysql_database_name }}'
   mysql_db:
     name: "{{ limesurvey_mysql_database_name }}"
-    state: present
 
 - name: Create mariadb user
   mysql_user:

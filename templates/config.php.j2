@@ -1,8 +1,9 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+// {{ ansible_managed }}
 return array(
         'components' => array(
                 'db' => array(
-                        'connectionString' => 'mysql:host=localhost;port=3306;dbname={{ limesurvey_mysql_database_name }};',
+                        'connectionString' => 'mysql:host={{ limesurvey_mysql_host }};port={{ limesurvey_mysql_port }};dbname={{ limesurvey_mysql_database_name }};',
                         'emulatePrepare' => true,
                         'username' => '{{ limesurvey_mysql_user }}',
                         'password' => '{{ limesurvey_mysql_password }}',

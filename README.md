@@ -46,6 +46,75 @@ A role to set up and configure a limesurvey instance. This role depends on an ap
 ## Example Playbook
 
 ```yml
+- hosts: all
+  become: true
+  vars:
+    limesurvey_release_link: "https://github.com/LimeSurvey/LimeSurvey/archive/2.72.4+171110.tar.gz"
+    limesurvey_mysql_password: fuckingchangethis
+    limesurvey_smtp_server: mail01.faveve.uni-stuttgart.de
+    limesurvey_smtp_port: 993
+    limesurvey_smtp_user: user
+    limesurvey_smtp_passwort: sichernicht
+    limesurvey_smtp_ssl: "ssl"
+    limesurvey_smtp_debug: false
+    limesurvey_admin_user: admin
+    limesurvey_admin_password: password
+    limesurvey_admin_full_name: "Fritz Otlinghaus" 
+    limesurvey_admin_email: fritz.otlinghaus@stuvus.uni-stuttgart.de
+    limesurvey_mail_admin_name: "stuvus - LimeSurvey"
+    limesurvey_mail_admin_adress: "limesurvey@stuvus.uni-stuttgart.de"
+    limesurvey_mail_bounce_adress: "limesurvey@stuvus.uni-stuttgart.de"
+    limesurvey_ldap_plugin_server_url: ldaps://ldap01.faveve.uni-stuttgart.de
+    limesurvey_ldap_plugin_server_port: "636"
+    limesurvey_ldap_plugin_ldap_version: "3"
+    limesurvey_ldap_plugin_opt_referrals: false
+    limesurvey_ldap_plugin_tls: false
+    limesurvey_ldap_plugin_ldap_mode: searchandbind
+    limesurvey_ldap_plugin_search_user_attribute: uid
+    limesurvey_ldap_plugin_user_search_base: 
+        - dc=faveve,dc=uni-stuttgart,dc=de
+    limesurvey_ldap_plugin_binddn: bind_dn
+    limesurvey_ldap_plugin_bindpwd: password
+    limesurvey_ldap_plugin_mail_attribute: mail
+    limesurvey_ldap_plugin_full_name_attribute: cn
+    limesurvey_ldap_plugin_is_default: true
+    limesurvey_ldap_plugin_auto_create: true
+    limesurvey_ldap_plugin_automatic_survey_creation: true
+    limesurvey_ldap_plugin_allow_initial_user: true
+    limesurvey_use_ldap: true
+    limesurvey_ldap_plugin_extra_user_filer: ""
+    limesurvey_ldap_plugin_group_search_base: ""
+    limesurvey_ldap_plugin_group_search_filter: ""
+    served_domains:
+      - domains: 
+          - survey
+          - limesurvey
+        default_server: true
+        allowed_ip_ranges:
+          - 172.27.10.0/24
+        https: false
+        enable_http2: true
+        root: /srv/limesurvey
+        index_files: 
+          - index.php
+        locations:
+          - condition: /favicon.ico
+            content:
+            |
+              log_not_found off;
+              access_log off;
+          - condition: /robots.txt
+            content:
+            |
+              allow all;
+              log_not_found off;
+              access_log off;
+          - condition: ~ \.php$
+            content:
+            |
+              include fastcgi.conf;
+              fastcgi_intercept_errors on;
+              fastcgi_pass unix:/run/php/php7.0-fpm.sock;
 ```
 
 ## License

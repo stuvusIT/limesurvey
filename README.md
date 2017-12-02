@@ -50,7 +50,7 @@ A role to set up and configure a limesurvey instance. This role depends on an ap
   become: true
   vars:
     limesurvey_release_link: "https://github.com/LimeSurvey/LimeSurvey/archive/2.72.4+171110.tar.gz"
-    limesurvey_mysql_password: fuckingchangethis
+    limesurvey_mysql_password: password
     limesurvey_smtp_server: mail01.faveve.uni-stuttgart.de
     limesurvey_smtp_port: 993
     limesurvey_smtp_user: user
@@ -59,12 +59,12 @@ A role to set up and configure a limesurvey instance. This role depends on an ap
     limesurvey_smtp_debug: false
     limesurvey_admin_user: admin
     limesurvey_admin_password: password
-    limesurvey_admin_full_name: "Fritz Otlinghaus" 
-    limesurvey_admin_email: fritz.otlinghaus@stuvus.uni-stuttgart.de
+    limesurvey_admin_full_name: "Your Name" 
+    limesurvey_admin_email: mail@mail.com
     limesurvey_mail_admin_name: "stuvus - LimeSurvey"
     limesurvey_mail_admin_adress: "limesurvey@stuvus.uni-stuttgart.de"
     limesurvey_mail_bounce_adress: "limesurvey@stuvus.uni-stuttgart.de"
-    limesurvey_ldap_plugin_server_url: ldaps://ldap01.faveve.uni-stuttgart.de
+    limesurvey_ldap_plugin_server_url: ldaps://ldap01.ldap.example.com
     limesurvey_ldap_plugin_server_port: "636"
     limesurvey_ldap_plugin_ldap_version: "3"
     limesurvey_ldap_plugin_opt_referrals: false

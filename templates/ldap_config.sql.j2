@@ -30,7 +30,7 @@ INSERT INTO `lime_plugin_settings` VALUES
 (NULL,{{ limesurvey_ldap_plugin_id.stdout_lines[0] }},NULL,NULL,'userprefix','{{ limesurvey_ldap_plugin_user_prefix | default("null") }}'),
 (NULL,{{ limesurvey_ldap_plugin_id.stdout_lines[0] }},NULL,NULL,'domainsuffix','{{ limesurvey_ldap_plugin_domain_prefix | default("null") }}'),
 (NULL,{{ limesurvey_ldap_plugin_id.stdout_lines[0] }},NULL,NULL,'searchuserattribute','\"{{ limesurvey_ldap_plugin_search_user_attribute | mandatory }}\"'),
-(NULL,{{ limesurvey_ldap_plugin_id.stdout_lines[0] }},NULL,NULL,'usersearchbase','\"{{ limesurvey_ldap_plugin_user_search_base | join(";") }}\"'),
+(NULL,{{ limesurvey_ldap_plugin_id.stdout_lines[0] }},NULL,NULL,'usersearchbase','\"{{ limesurvey_ldap_plugin_user_search_base | join(';') }}\"'),
 (NULL,{{ limesurvey_ldap_plugin_id.stdout_lines[0] }},NULL,NULL,'extrauserfilter','\"{{ limesurvey_ldap_plugin_extra_user_filer | default("") }}\"'),
 (NULL,{{ limesurvey_ldap_plugin_id.stdout_lines[0] }},NULL,NULL,'binddn','\"{{ limesurvey_ldap_plugin_binddn }}\"'),
 (NULL,{{ limesurvey_ldap_plugin_id.stdout_lines[0] }},NULL,NULL,'bindpwd','\"{{ limesurvey_ldap_plugin_bindpwd }}\"'),

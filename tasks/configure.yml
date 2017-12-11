@@ -45,7 +45,7 @@
       key: "domainsuffix"
     - value: "{{ limesurvey_ldap_plugin_search_user_attribute }}"
       key: "searchuserattribute"
-    - value: "{{ limesurvey_ldap_plugin_user_search_base | join(;) }}"
+    - value: "{{ limesurvey_ldap_plugin_user_search_base | join(';') }}"
       key: "usersearchbase"
     - value: "{{ limesurvey_ldap_plugin_extra_user_filer }}"
       key: "extrauserfilter"

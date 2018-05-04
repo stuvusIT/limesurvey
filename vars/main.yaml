@@ -8,29 +8,15 @@ php_fpm_pools:
   pm_start_servers: 20
   processes_priority: -19 
 php_fpm_php_ini_values:
-- section: PHP
-  option: extension
-  value: php_mysqli
-- section: PHP
-  option: extension
-  value: php_mbstring
-- section: PHP
-  option: extension
-  value: php_dblib
-- section: PHP
-  option: extension
-  value: php_ldap
-- section: PHP
-  option: extension
-  value: php_gd
-- section: PHP
-  option: extension
-  value: php_imap
-- section: PHP
-  option: extension
-  value: php_zip
-- section: PHP
-  option: extension
-  value: php_zlib
+  PHP:
+    extension:
+      - php_mysqli
+      - php_mbstring
+      - php_dblib
+      - php_ldap
+      - php_gd
+      - php_imap
+      - php_zip
+      - php_zlib
 nginx_access_log: "/var/log/nginx/limesurvey_access.log"
 nginx_error_log: "/var/log/nginx/limesurvey_error.log"

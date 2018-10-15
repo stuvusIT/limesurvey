@@ -14,6 +14,9 @@ galaxy_info:
         - yakkety
         - zesty
         - artful
+    - name: Debian
+      versions:
+        - stretch
 
   galaxy_tags:
     - survey

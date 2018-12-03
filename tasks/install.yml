@@ -1,16 +1,14 @@
 - name: Install php packages
   apt:
-    name: "{{ item }}"
-  when: ansible_pkg_mgr == "apt"
-  with_items:
-    - php-simplexml
-    - php-gd
-    - php-ldap
-    - php-imap
-    - php-mbstring
-    - php-zip
-    - php-mysqli
-    - python-mysqldb
+    name:
+      - php-simplexml
+      - php-gd
+      - php-ldap
+      - php-imap
+      - php-mbstring
+      - php-zip
+      - php-mysqli
+      - python-mysqldb
 
 - name: Create install dir
   file:

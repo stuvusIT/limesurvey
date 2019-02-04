@@ -40,6 +40,7 @@
     password: "{{ limesurvey_mysql_password }}"
     priv: '{{ limesurvey_mysql_database_name }}.*:ALL,GRANT'
     state: present
+  no_log: True
 
 - name: Place config file
   template:

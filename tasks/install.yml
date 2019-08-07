@@ -9,6 +9,7 @@
       - php-zip
       - php-mysqli
       - python-mysqldb
+      - python3-mysqldb
 
 - name: Create install dir
   file:

@@ -51,7 +51,7 @@
     group: www-data
     mode: 0644
 
-- name: Run installer  
+- name: Run installer
   shell: "sudo -u www-data php console.php install {{ limesurvey_admin_user }} {{ limesurvey_admin_password }} '{{ limesurvey_admin_full_name }}' '{{ limesurvey_admin_email }}'"
   args:
     chdir: /srv/limesurvey/application/commands/
@@ -71,6 +71,6 @@
     dest: /tmp/ldap_config.sql
   when: limesurvey_use_ldap
 
-- name: Import data for ldap plugin  
+- name: Import data for ldap plugin
   shell: "mysql {{ limesurvey_mysql_database_name }} < /tmp/ldap_config.sql"
   when: limesurvey_use_ldap

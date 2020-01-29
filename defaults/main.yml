@@ -10,7 +10,7 @@ limesurvey_smtp_passwort: ''
 limesurvey_smtp_ssl: "tls"
 limesurvey_smtp_debug: false
 limesurvey_admin_user: admin
-limesurvey_admin_full_name: "Your Name" 
+limesurvey_admin_full_name: "Your Name"
 limesurvey_admin_email: "your.name@example.com"
 limesurvey_mail_admin_name: "Your Name"
 limesurvey_mail_admin_adress: "your.name@example.com"

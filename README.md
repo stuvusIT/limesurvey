@@ -59,7 +59,7 @@ A role to set up and configure a limesurvey instance. This role depends on an ap
     limesurvey_smtp_debug: false
     limesurvey_admin_user: admin
     limesurvey_admin_password: password
-    limesurvey_admin_full_name: "Your Name" 
+    limesurvey_admin_full_name: "Your Name"
     limesurvey_admin_email: mail@mail.com
     limesurvey_mail_admin_name: "stuvus - LimeSurvey"
     limesurvey_mail_admin_adress: "limesurvey@stuvus.uni-stuttgart.de"
@@ -71,7 +71,7 @@ A role to set up and configure a limesurvey instance. This role depends on an ap
     limesurvey_ldap_plugin_tls: false
     limesurvey_ldap_plugin_ldap_mode: searchandbind
     limesurvey_ldap_plugin_search_user_attribute: uid
-    limesurvey_ldap_plugin_user_search_base: 
+    limesurvey_ldap_plugin_user_search_base:
         - dc=faveve,dc=uni-stuttgart,dc=de
     limesurvey_ldap_plugin_binddn: bind_dn
     limesurvey_ldap_plugin_bindpwd: password
@@ -86,7 +86,7 @@ A role to set up and configure a limesurvey instance. This role depends on an ap
     limesurvey_ldap_plugin_group_search_base: ""
     limesurvey_ldap_plugin_group_search_filter: ""
     served_domains:
-      - domains: 
+      - domains:
           - survey
           - limesurvey
         default_server: true
@@ -95,7 +95,7 @@ A role to set up and configure a limesurvey instance. This role depends on an ap
         https: false
         enable_http2: true
         root: /srv/limesurvey
-        index_files: 
+        index_files:
           - index.php
         locations:
           - condition: /favicon.ico

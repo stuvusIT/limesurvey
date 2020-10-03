@@ -32,7 +32,7 @@
     state: absent
 
 - name: Create a new database with name '{{ limesurvey_mysql_database_name }}'
-  mysql_db:
+  community.mysql.mysql_db:
     name: "{{ limesurvey_mysql_database_name }}"
 
 - name: Create mariadb user
